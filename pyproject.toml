@@ -51,7 +51,7 @@ exclude_lines = [
 ]
 
 # ============================================================
-# Mypy Configuration 
+# Mypy Configuration
 # ============================================================
 [tool.mypy]
 python_version = "3.12"
