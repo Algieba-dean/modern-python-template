@@ -1,7 +1,7 @@
 # Python Project Template
 
 ![Python](https://img.shields.io/badge/python-3.12+-blue.svg)
-![Build](https://img.shields.io/github/actions/workflow/status/Algieba-dean/python-project-template/ci.yml?label=CI)
+![Build](https://img.shields.io/github/actions/workflow/status/Algieba-dean/modern-python-template/ci.yml?label=CI)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Code Style](https://img.shields.io/badge/code%20style-ruff-000000.svg)
 ![Type Checker](https://img.shields.io/badge/type%20checker-mypy-blue)
