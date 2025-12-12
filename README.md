@@ -144,6 +144,24 @@ We use `uv run` to execute commands within the virtual environment.
 └── uv.lock                 # Dependency lock file
 ````
 
+## Docker Support
+
+This project includes a multi-stage `Dockerfile` optimized for size and security, based on `python:3.12-slim-bookworm`.
+
+### Build the Image
+
+```bash
+docker build -t my_package_image .
+```
+
+### Run the Container
+
+```bash
+docker run --rm my_package_image
+```
+
+Note: The default entrypoint is configured to run the module specified in the CMD instruction of the Dockerfile. Remember to update the module name in the Dockerfile to match your actual project name (e.g., src/my_package)
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
