@@ -107,6 +107,18 @@ uv sync --dev
 uv run pre-commit install
 ```
 
+### Documentation
+
+We use MkDocs to build our documentation.
+
+````bash
+# 1. Install doc dependencies
+uv sync --extra docs
+
+# 2. Start local server (Live preview)
+uv run mkdocs serve
+```
+Open http://127.0.0.1:8000 in your browser
 ### Common Commands
 
 We use `uv run` to execute commands within the virtual environment.
@@ -130,7 +142,7 @@ We use `uv run` to execute commands within the virtual environment.
 ├── pyproject.toml          # Project configuration (Ruff, Mypy, Pytest)
 ├── .pre-commit-config.yaml # Pre-commit hooks
 └── uv.lock                 # Dependency lock file
-```
+````
 
 ## Contributing
 
