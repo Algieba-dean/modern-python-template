@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "A template for modern Python projects"
 readme = "README.md"
 requires-python = ">=3.12"
-authors = [{ name = "Algieba-dean", email = "your.email@example.com" }]
+authors = [{ name = "Algieba-dean", email = "algieba.king@gmail.com" }]
 license = "MIT"
 
 dependencies = []
@@ -25,6 +25,10 @@ dev = [
     "pre-commit>=4.0.1",
     "mypy>=1.18.2",
 ]
+
+[project.optional-dependencies]
+# documentation
+docs = ["mkdocs-material>=9.5", "mkdocstrings[python]>=0.24"]
 
 # ============================================================
 # Pytest Configuration
