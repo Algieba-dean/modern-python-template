@@ -28,7 +28,11 @@ dev = [
 
 [project.optional-dependencies]
 # documentation
-docs = ["mkdocs-material>=9.5", "mkdocstrings[python]>=0.24"]
+docs = [
+    "mkdocs-material>=9.5",
+    "mkdocstrings[python]>=0.24",
+    "mkdocs-static-i18n>=1.2.0",
+]
 
 # ============================================================
 # Pytest Configuration
