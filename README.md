@@ -1,4 +1,6 @@
-# Python Project Template
+# Python 项目模板
+
+[![English Docs](https://img.shields.io/badge/docs-English-blue)](README.en.md)
 
 ![Python](https://img.shields.io/badge/python-3.12+-blue.svg)
 ![Build](https://img.shields.io/github/actions/workflow/status/Algieba-dean/modern-python-template/ci.yml?label=CI)
@@ -6,166 +8,82 @@
 ![Code Style](https://img.shields.io/badge/code%20style-ruff-000000.svg)
 ![Type Checker](https://img.shields.io/badge/type%20checker-mypy-blue)
 
-A modern, industrial-grade Python project template aimed at strict engineering standards and automation.
+一个旨在严格工程标准和自动化的现代化、工业级 Python 项目模板。
 
 ---
 
-## Setup Guide (For Maintainers)
+## 设置指南（维护者专用）
 
-> **Note:** Delete this section after you have initialized your new project.
+> **注意：** 在初始化新项目后，请删除本节内容或 `init_project.py` 脚本。
 
-### 1. Bootstrap
+### 1. 启动项目
 
-Click the **[Use this template]** button to create a new repository.
+点击 **[Use this template]** 按钮创建一个新的代码仓库。
 
-### 2. Rename & Reconfigure
+### 2. 初始化项目（自动化）
 
-After cloning your new repository, perform the following steps:
+我们提供了一个脚本来自动完成重命名和配置过程。
 
-- [ ] **Rename Source Package**:
-  - Rename `src/my_package/` to `src/your_project_name/`.
-- [ ] **Update Metadata (`pyproject.toml`)**:
-  - Change `name` to your project name.
-  - Change `description`, `authors`, etc.
-  - Search for `TODO` comments in the file:
-    - Update `[tool.hatch.build.targets.wheel] packages = ["src/your_project_name"]`.
-    - Update `[tool.ruff.lint.isort] known-first-party = ["your_project_name"]`.
-- [ ] **Update GitHub Config (`.github/ISSUE_TEMPLATE/config.yml`)**:
-  - Open `.github/ISSUE_TEMPLATE/config.yml`.
-  - Update the `url` in `contact_links` to point to your new repository's Discussions page.
-- [ ] **Reset Lock File**:
-  - Delete `uv.lock` to ensure you start with fresh dependencies.
-  - Run `uv sync` to generate a new lock file.
+1.  **运行初始化脚本**：
 
-### 3. Setup CI/CD Secrets
+    ```bash
+    # 确保已安装 Python 3
+    python init_project.py
+    ```
 
-To enable Codecov coverage reports:
+    按照提示输入你的 **项目名称**、**包名称**、**作者姓名** 和 **GitHub 用户名**。
 
-1. Go to [Codecov](https://about.codecov.io/) and enable it for your new repo.
-2. Get the upload token.
-3. Go to your GitHub Repo **Settings** -> **Secrets and variables** -> **Actions**.
-4. Add a new repository secret named `CODECOV_TOKEN`.
+2.  **脚本会自动执行以下操作**：
 
-### 4. Enable Security Features
+    - 重命名源代码目录（`src/my_package` -> `src/your_pkg`）。
+    - 更新 `pyproject.toml`、`mkdocs.yml`、`Dockerfile` 和 GitHub 模板文件。
+    - 替换 `SECURITY.md` 和 `CODE_OF_CONDUCT.md` 中的作者邮箱。
+    - 更新引用信息和文档链接。
+    - 重置 `uv.lock` 以便重新锁定依赖。
 
-1. Go to **Settings** -> **Security** -> **Code security and analysis**.
-2. Enable **Private vulnerability reporting**.
-   _(This ensures the "Report a vulnerability" button works as described in `SECURITY.md`)_
+3.  **完成设置**：
 
-### 5. Sync Labels
+    ```bash
+    # 安装最新依赖
+    uv sync --dev
 
-The label synchronization workflow runs automatically on the first push to `main`.
+    # 验证一切是否正常
+    uv run pytest
 
-- It will **delete** default GitHub labels (bug, enhancement).
-- It will **create** standardized labels (`kind/bug`, `area/core`, `priority/high`) defined in `.github/labels.yml`.
-- If you need to trigger it manually: Go to **Actions** -> **Sync Labels** -> **Run workflow**.
+    # 清理脚本
+    rm init_project.py
+
+    # 提交初始化的项目
+    git add .
+    git commit -m "chore: initialize project from template"
+    ```
+
+### 3. 设置 CI/CD 密钥
+
+要启用 Codecov 覆盖率报告：
+
+1. 前往 [Codecov](https://about.codecov.io/) 并为你的新仓库启用它。
+2. 获取上传令牌（upload token）。
+3. 前往 GitHub 仓库的 **Settings** -> **Secrets and variables** -> **Actions**。
+4. 添加一个名为 `CODECOV_TOKEN` 的新仓库密钥。
+
+### 4. 启用安全功能
+
+1. 前往 **Settings** -> **Security** -> **Code security and analysis**。
+2. 启用 **Private vulnerability reporting**。
+   _（这确保了 "Report a vulnerability" 按钮能像 `SECURITY.md` 中描述的那样工作）_
+
+### 5. 同步标签（Labels）
+
+标签同步工作流会在首次推送到 `main` 分支时自动运行。
+
+- 它将 **删除** 默认的 GitHub 标签（如 bug, enhancement）。
+- 它将 **创建** 在 `.github/labels.yml` 中定义的标准化标签（如 `kind/bug`, `area/core`, `priority/high`）。
+- 如果需要手动触发：前往 **Actions** -> **Sync Labels** -> **Run workflow**。
 
 ---
 
-## Features
+## 功能特性
 
-- **Package Manager**: [uv](https://github.com/astral-sh/uv) - Ultra-fast dependency management.
-- **Linter & Formatter**: [ruff](https://github.com/astral-sh/ruff) - The all-in-one tool replacing Black, Isort, and Flake8.
-- **Type Checking**: [mypy](https://mypy-lang.org/) - Configured in **strict mode**.
-- **Testing**: [pytest](https://docs.pytest.org/) + [pytest-cov](https://pytest-cov.readthedocs.io/).
-- **Automation**:
-  - **Pre-commit hooks**: Ensures code quality before committing.
-  - **GitHub Actions**:
-    - Automated Testing & Linting.
-    - **Stale Bot**: Closes inactive issues.
-    - **Labeler**: Auto-labels PRs based on changed files.
-    - **Label Sync**: Enforces standardized labels across the repo.
-    - **Release Drafter**: Automatically drafts release notes based on PR labels.
-- **Community Standards**:
-  - Ready-to-use Issue Templates (Bug Report, Feature Request).
-  - PR Template with Checklist.
-  - Security Policy & Code of Conduct.
-
-## Development
-
-### Prerequisites
-
-- Python 3.12+
-- [uv](https://github.com/astral-sh/uv)
-
-```bash
-# Install uv
-pip install uv
-```
-
-### Setup
-
-```bash
-# Clone the repo
-git clone [https://github.com/your-username/your-new-project.git](https://github.com/your-username/your-new-project.git)
-cd your-new-project
-
-# Install dependencies (creates a virtualenv automatically)
-uv sync --dev
-
-# Install pre-commit hooks
-uv run pre-commit install
-```
-
-### Documentation
-
-We use MkDocs to build our documentation.
-
-````bash
-# 1. Install doc dependencies
-uv sync --extra docs
-
-# 2. Start local server (Live preview)
-uv run mkdocs serve
-```
-Open http://127.0.0.1:8000 in your browser
-### Common Commands
-
-We use `uv run` to execute commands within the virtual environment.
-
-| Task              | Command                     |
-| :---------------- | :-------------------------- |
-| **Run Tests**     | `uv run pytest`             |
-| **Linting**       | `uv run ruff check .`       |
-| **Auto-fix Lint** | `uv run ruff check . --fix` |
-| **Formatting**    | `uv run ruff format .`      |
-| **Type Check**    | `uv run mypy .`             |
-
-## Project Structure
-
-```text
-.
-├── .github/                # GitHub Actions, Templates, Labels
-├── src/
-│   └── my_package/         # Source code (Rename this!)
-├── tests/                  # Test suite
-├── pyproject.toml          # Project configuration (Ruff, Mypy, Pytest)
-├── .pre-commit-config.yaml # Pre-commit hooks
-└── uv.lock                 # Dependency lock file
-````
-
-## Docker Support
-
-This project includes a multi-stage `Dockerfile` optimized for size and security, based on `python:3.12-slim-bookworm`.
-
-### Build the Image
-
-```bash
-docker build -t my_package_image .
-```
-
-### Run the Container
-
-```bash
-docker run --rm my_package_image
-```
-
-Note: The default entrypoint is configured to run the module specified in the CMD instruction of the Dockerfile. Remember to update the module name in the Dockerfile to match your actual project name (e.g., src/my_package)
-
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- **包管理器**: [uv](https://github.com/astral-sh/uv) - 超快速的依赖管理工具。
+- **Linter & Formatter**: [ruff](https://github.com/astral-sh/ruff) -
