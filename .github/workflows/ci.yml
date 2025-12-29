@@ -49,7 +49,7 @@ jobs:
       # Critical Step: Cache Pre-commit environment
       # -------------------------------------------------------
       - name: Cache pre-commit hooks
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cache/pre-commit
           key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
@@ -108,7 +108,7 @@ jobs:
 
       # 6. Upload Coverage HTML Report
       - name: Upload Coverage HTML Report
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           # Add matrix name to prevent overwriting artifacts from different jobs
